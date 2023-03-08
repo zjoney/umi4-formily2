@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>btn/delete</title>
+    <desc>Created with Sketch.</desc>
+    <g id="btn/delete" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M4,2 L4,1 L12,1 L12,2 L16,2 L16,4 L15,4 L15,13 C15,14.6568542 13.6568542,16 12,16 L4,16 C2.34314575,16 1,14.6568542 1,13 L1,4 L0,4 L0,2 L4,2 Z M3,4 L3,13 C3,13.5522847 3.44771525,14 4,14 L12,14 C12.5522847,14 13,13.5522847 13,13 L13,4 L3,4 Z M5,6 L7,6 L7,12 L5,12 L5,6 Z M9,6 L11,6 L11,12 L9,12 L9,6 Z" id="Combined-Shape" fill="#0F9096"></path>
+    </g>
+</svg>

@@ -1,0 +1,248 @@
+/* 文字超过范围用"..."替代 */
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 无数据显示内容 */
+.none-data-content {
+  text-align: center;
+  color: @text-assist-color;
+}
+
+/* 自定antd FormItem必填项 */
+
+.has-feed-back {
+  position: relative;
+
+  &::before {
+    content: "*";
+    position: absolute;
+    left: -15px;
+    top: 12px;
+    color: red;
+    font-size: 18px;
+  }
+}
+
+/* 自定义无边框按钮 */
+.button-non-border {
+  color: @brand-main-color;
+
+  &:hover {
+    color: lighten(@brand-main-color, 10%);
+  }
+}
+
+*::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #aaa !important;
+}
+
+*:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #aaa !important;
+}
+
+*::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #aaa !important;
+}
+
+*:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #aaa !important;
+}
+
+.ant-btn-primary {
+  background: @ewell-main-color;
+}
+
+a {
+  color: @ewell-main-color;
+
+  &:hover {
+    color: @ewell-main-color;
+  }
+}
+
+.ant-btn-background-ghost.ant-btn-primary {
+  color: @ewell-main-color;
+  border-color: @ewell-main-color;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  color: #FFFFFF;
+  background: @ewell-foucs-hover-color;
+}
+
+.body-theme-default {
+  .gloabl-back-color {
+    background: #f5f5f6;
+  }
+
+  // 表格列表布局
+  .table-vertical-layout {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 16px;
+    border: 1px solid @border-color;
+
+    .ant-table {
+      table {
+        border-left: none;
+        border-right: none;
+      }
+    }
+
+    &-top {
+      height: 56px;
+      width: 100%;
+      background: #fff;
+
+      .table-action {
+        padding: 11px 16px;
+
+        button {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    &-middle {
+      // margin-top: 16px;
+      background: #fff;
+
+      .state-circle {
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        margin-right: 5px;
+        display: inline-block;
+      }
+
+      .ant-row {
+        line-height: 38px;
+      }
+
+      .ant-table-thead>tr>th,
+      .ant-table td {
+        padding: 0px 28px;
+      }
+
+      .detail-role-table .ant-table-thead>tr>th {
+        height: 38px;
+      }
+
+    }
+  }
+}
+
+.layout-default-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid @border-color;
+
+  >thead {
+    >tr {
+      >th {
+        height: 52px;
+        color: @text-assist-color;
+        font-size: 14px;
+        padding-left: 16px;
+        text-align: left;
+        background-color: @content-back-color;
+      }
+    }
+  }
+
+  >tbody {
+
+    >tr {
+      border-top: 1px solid @border-color;
+
+      >td {
+        height: 52px;
+        color: @text-info-color;
+        font-size: 14px;
+        padding-left: 16px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.ant-table-thead {
+  >tr {
+    th {
+      background: #EEF5F9;
+    }
+  }
+}
+
+.ant-layout-content {
+  padding-inline: inherit !important;
+}
+
+.ant-btn-default:hover,
+.ant-btn-default:focus {
+  color: @ewell-foucs-hover-color;
+  border-color: @ewell-foucs-hover-color;
+}
+
+.ant-input-affix-wrapper:hover {
+  border-color: @ewell-foucs-hover-color  !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: @ewell-foucs-hover-color  !important;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+a {
+  color: #0D7F85;
+  ;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: @ewell-main-color;
+  border-color: @ewell-main-color;
+}
+
+.ant-btn-default {
+  color: #0DAAB1;
+  border-color: #0DAAB1
+}
+.ant-pagination-item-active a {
+  color: @ewell-main-color;
+}
+.ant-pagination-item-active {
+  border-color: @ewell-main-color;
+}
+.ant-pagination-item-active:hover {
+  border-color: @ewell-main-color;
+}
+.ant-pagination-item:hover {
+  border-color: @ewell-main-color;
+}
