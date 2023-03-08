@@ -9,12 +9,9 @@ import {
   createForm, onFieldReact,
 } from '@formily/core'
 import { useLocation } from 'umi';
-// import router from "@/utils/router";
-// import { getFluidDetail, commonDict, queryFrequencyList, getChangeDataList, fluidUpdate, fluidAdd, fluidSuspend } from '@/services/drugKnowledge';
 import handleConfig from './config';
 import AddOrDetail from './components/AddOrDetail';
 import { history } from 'umi';
-// import util from '@/utils'
 import './index.less';
 
 

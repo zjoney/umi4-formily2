@@ -8,7 +8,6 @@ import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 // ingredient列
 const ingredientGroupColumnList = [{ width: 200, title: 'Ingredient Desc' }, { width: 200, title: 'ingredient Strength Desc' }, { width: 200, title: 'ingredient Strength Value' }, { width: 200, title: 'ingredient Strength Unit' }, { width: 200, title: 'volume Value' }, { width: 200, title: 'volume Unit' }, { width: 120, title: '' }];
-// if (+type !== 1) ingredientGroupColumnList.push({ width: 120, title: '' });
 
 // ingredient宽度之和
 const ingredientWidth = ingredientGroupColumnList.reduce((acc, current) => {

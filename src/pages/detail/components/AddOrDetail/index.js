@@ -31,7 +31,6 @@ import {
   ArrayTable,
 } from '@formily/antd';
 import SelfTableArray from '../ArrayTableSelf';
-// import { queryFrequencyList, queryRateUnitAndDesc, listIngredientDict, listGroupUnit } from '@/services/drugKnowledge';
 import './index.less';
 
 

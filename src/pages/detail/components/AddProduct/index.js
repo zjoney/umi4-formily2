@@ -2,8 +2,6 @@ import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { FormItem, FormButtonGroup, Submit, SelectTable, FormDrawer } from '@formily/antd'
 import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField, Field, FormConsumer } from '@formily/react'
-// import { listTradeMasterRelationByPage } from '@/services/drugKnowledge';
-// import utils from '@/utils';
 import { Table, Input, Button } from 'antd';
 
 const SchemaField = createSchemaField({
@@ -52,15 +50,7 @@ const AddProduct = (props) => {
     handleDetail({ ...data, tradeMasterModelList: [...tradeMasterModelList, ...selectProductList] })
     drawer.close();
   }
-  // /**
-  //  * 提交
-  //  * @param {*} values 
-  //  */
-  // const handleSubmit = async () => {
-  //   const { tradeMasterModelList = [] } = data;
-  //   handleDetail({ ...data, tradeMasterModelList: [...tradeMasterModelList, ...selectProductList] })
-  //   drawer.close();
-  // }
+
   /**
    * 分页
    * @param {*} page 
@@ -136,22 +126,6 @@ const AddProduct = (props) => {
         </FormButtonGroup>
       </FormButtonGroup.Sticky>
     </FormProvider>
-    // <>
-    //   <Input.Search onSearch={handleSearch} placeholder="Enter 4 characters" style={{ marginButton: '16px' }} />
-    //   <Table
-    //     columns={columns}
-    //     rowKey='ampCode'
-    //     onChange={handleProductChange}
-    //     dataSource={tableData?.list || []}
-    //     pagination={utils.pagination({ ...tableData, ...tableQuery.current })}
-    //     scroll={{ y: 'calc(100vh - 310px)' }}
-    //     rowSelection={{
-    //       selectedRowKeys,
-    //       onChange: onSelectChange,
-    //     }}
-    //   />
-    //   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}><Button type="primary" onClick={handleSubmit}>{`Select ${selectProductList?.length || 0}`}</Button></div>
-    // </>
   )
 }
 
