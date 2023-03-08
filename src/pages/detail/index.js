@@ -18,7 +18,7 @@ import './index.less';
 const Detail = () => {
   const location = useLocation();
   const { search } = location;
-  const { type=3, fluidCode } = search;
+  const { type = 3, fluidCode } = search;
   const [detailList, setDetailList] = useState([]); // 详情数据
   const [versionList, setVersionList] = useState([]); // version的列表
   const [detail, setDetail] = useState({});
@@ -146,7 +146,7 @@ const Detail = () => {
   }
 
   const form = useMemo(() => {
-  
+
     return createForm({
       initialValues: {
         ...detail,
@@ -205,7 +205,7 @@ const Detail = () => {
     const result = {};
     const { object = {} } = result;
     const { list = [] } = object || {};
-    
+
     setVersionList(list);
   }
   console.log('versionList=[]', versionList)
@@ -293,6 +293,47 @@ const Detail = () => {
 
   return (
     <div className="fluidAddOrDetailContainer">
+      <FormGrid className="fluidHeader">
+        <FormGrid.GridColumn
+          gridSpan={-1}
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <FormButtonGroup.FormItem>
+            <FormButtonGroup align="left">
+              <div className="back" onClick={() => history.push('/drugKnowledge.ivFluid')}>&lt; &nbsp;back&nbsp;</div>
+              <div>{`${['', '', 'edit', 'add'][+type]}Fluid ${+type === 1 ? 'Detail' : ''}`}</div>
+            </FormButtonGroup>
+          </FormButtonGroup.FormItem>
+          <Space>
+            <AntdSelect
+              style={{ width: '300px' }}
+              placeholder="Previous version"
+              onChange={handleChangeVeision}
+            >
+              {
+                versionList.map((item) => {
+                  const { updateUser, updateTime, serialNo } = item;
+                  return <AntdSelect.Option
+                    key={serialNo}
+                    value={updateTime}
+                    itemValue={item}
+                  >
+                    {`${updateUser}--${updateTime}--Active`}
+                  </AntdSelect.Option>
+                })
+              }
+            </AntdSelect>
+            {
+              +type === 1 &&
+              <Space>
+                <Button onClick={handleEdit} type="primary" disabled={detail.statusFlag === 0 || (detail.fluidCode === 'F999999')}>Edit</Button>
+                <Button type="default" onClick={handleSuspend} disabled={detail.statusFlag === 0 || (detail.fluidCode === 'F999999')}>Suspend</Button>
+              </Space>
+            }
+            {[2, 3].includes(+type) && <Button onClick={handleSubmit} type="primary">Save&Submit(Active)</Button>}
+          </Space>
+        </FormGrid.GridColumn>
+      </FormGrid>
       {/* 详情、编辑、新增 */}
       {(form && detailList.length > 0) && <AddOrDetail data={detailList} form={form} />}
     </div>
