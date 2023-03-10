@@ -40,7 +40,6 @@ const Detail = () => {
    */
   const handleSchema = (config, data) => {
     const { fields = [] } = config;
-    // console.log('fields', fields)
     const result = {
       type: 'object',
       properties: {}
@@ -52,9 +51,7 @@ const Detail = () => {
         name: fieldName,
         title: fieldLabel || '',
         required: required || false,
-        // disabled: +type === 1 && fieldType === 'Checkbox.Group' ? true : disabled,
         enum: field.enum,
-        // default: data[fieldName] || '',
         'x-decorator': 'FormItem',
         'x-decorator-props': {
           labelWidth: 150,
@@ -65,24 +62,6 @@ const Detail = () => {
         'x-disabled': +type === 1 && fieldType === 'Checkbox.Group' ? true : disabled,
         'x-hidden': visible,
         'x-component': `${(+type === 1 && fieldType !== 'Checkbox.Group') ? `PreviewText.Input` : `${fieldType}`}`,
-        // type: 'string',
-        // name: 'select',
-        // title: 'Route' || '',
-        // required: true || false,
-        // enum:  [
-        //   { label: '选项1', value: 1 },
-        //   { label: '选项2', value: 2 },
-        // ],
-        // 'x-decorator': 'FormItem',
-        // 'x-decorator-props': {
-        //   labelWidth: 150,
-        //   wrapperAlign: 'right',
-        //   addonAfter: addonAfter,
-        //   addonBefore: addonBefore
-        // },
-        // 'x-disabled': +type === 1 && fieldType === 'Checkbox.Group' ? true : disabled,
-        // 'x-hidden': visible,
-        // 'x-component': `Select`,
       };
     });
     return result;
@@ -95,9 +74,9 @@ const Detail = () => {
     const result = handleConfig(type, data, formConfig).map((item) => {
       // 将fields里面的字段结合type变成相应的schema，以及从对应的data里拿到对应的值赋值为default值
       const schema = item.used === 'formily' ? handleSchema(item, data) : item.schema;
+      console.log('@@', { ...item, schema } );
       return { ...item, schema }
     });
-    console.log('detailList', result)
     // 存储详情数据
     setDetailList(result)
   }
@@ -107,7 +86,6 @@ const Detail = () => {
     (async () => {
       // 获取version列表
       handleVersionList();
-      console.log('type=3', type)
       if (type) {
         // 详情数据
         let detailData = {};
@@ -124,7 +102,6 @@ const Detail = () => {
       }
     })()
   }, [type]);
-  console.log('detail={}', detail)
   /**
    * group分类
    * @param {*} list 
@@ -208,7 +185,6 @@ const Detail = () => {
 
     setVersionList(list);
   }
-  console.log('versionList=[]', versionList)
   // 提交
   const handleSubmit = () => {
     return form.submit().then((values) => {
@@ -300,7 +276,7 @@ const Detail = () => {
         >
           <FormButtonGroup.FormItem>
             <FormButtonGroup align="left">
-              <div className="back" onClick={() => history.push('/drugKnowledge.ivFluid')}>&lt; &nbsp;back&nbsp;</div>
+              <div className="back" onClick={() => history.push('/')}>&lt; &nbsp;back&nbsp;</div>
               <div>{`${['', '', 'edit', 'add'][+type]}Fluid ${+type === 1 ? 'Detail' : ''}`}</div>
             </FormButtonGroup>
           </FormButtonGroup.FormItem>
