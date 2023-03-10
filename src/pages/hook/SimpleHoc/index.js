@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'dva';
-import { useLocation, history } from 'umi';
+import { useLocation ,history } from 'umi';
 import { Button  } from 'antd'
 import { stringTimeFormatStamp } from '../../../utils'
 const simpleHoc = WrappedComponent => (children) => {
@@ -19,7 +19,7 @@ export default simpleHoc;
  * @return [{ querying, list, pagination }, onChange,]
  */
 export const usePagination = (namePase) => {
-  const { query, pathname } = useLocation();
+  const { search, pathname } = useLocation();
   const { pagination: prevPagin = {}, loading: querying, list: prevList } = useSelector((state) => {
     return {
       pagination: state[namePase]?.pagination,
@@ -34,9 +34,9 @@ export const usePagination = (namePase) => {
   const [pagination, setPagination] = useState({
     showTotal: (total) => `共 ${total} 条`,
     simple: document.body.clientWidth < 769,
-    current: Number(query?.pageNo) || 1,
+    current: Number(search?.pageNo) || 1,
     total: prevPagin?.total || 0,
-    pageSize: Number(query?.pageSize) || 20,
+    pageSize: Number(search?.pageSize) || 20,
     showSizeChanger: true,
     showQuickJumper: {
       goButton: (
@@ -54,56 +54,63 @@ export const usePagination = (namePase) => {
   }, [prevPagin.total, prevList]);
 
   const onChange = (type, value, filters, sorter = {}) => {
+    let search ={}
+    console.log(value, type)
     if (value) {
-      console.log('usePagination', type, filters)
       switch (type) {
         case 'pagination':
           if (filters) {
             Object.keys(filters).forEach(item => {
               if (filters[item]?.toString()) {
-                query[item] = filters[item].toString();
+                search[item] = filters[item].toString();
               } else {
-                delete query[item];
+                delete search?.[item];
               }
             });
           }
-          query.pageNo = value.current;
-          query.pageSize = value.pageSize;
+          search.pageNo = value?.current;
+          search.pageSize = value?.pageSize;
           break;
         case 'range':
           if (filters.length !== 0) {
-            query[filters[0]] = stringTimeFormatStamp(value[0], 'start');
-            query[filters[1]] = stringTimeFormatStamp(value[1], 'end');
+            search[filters[0]] = stringTimeFormatStamp(value[0], 'start');
+            search[filters[1]] = stringTimeFormatStamp(value[1], 'end');
             if (!value[0]) {
-              delete query[filters[0]];
-              delete query[filters[1]];
+              delete search[filters[0]];
+              delete search[filters[1]];
             }
           } else {
             Object.keys(value).forEach(item => {
-              if (value[item]) query[item] = stringTimeFormatStamp(value[item], item.includes('start') ? 'start' : 'end');
-              else delete query[item];
+              if (value[item]) search[item] = stringTimeFormatStamp(value[item], item.includes('start') ? 'start' : 'end');
+              else delete search?.[item];
             });
           }
 
-          delete query.pageNo;
-          delete query.pageSize;
+          delete search?.pageNo;
+          delete search?.pageSize;
           break;
         default:
-          query[type] = value;
-          delete query.pageNo;
-          delete query.pageSize;
+          search[type] = value;
+          delete search?.pageNo1;
+          delete search?.pageSize2;
           break;
       }
     } else {
-      delete query[type];
+      delete search[type];
     }
-    const newPagin = { ...pagination, current: +query?.pageNo || 1, total: +prevPagin?.total || 0, pageSize: +query?.pageSize || 20 };
+    const newPagin = { ...pagination, current: +search?.pageNo || 1, total: +prevPagin?.total || 0, pageSize: +search?.pageSize || 20 };
     setPagination(newPagin);
     // 增加排序处理
     if (sorter?.field) {
-      query[sorter.field] = sorter.order;
+      search[sorter.field] = sorter.order;
     }
-    history.replace({ pathname, query });
+    const stringParams  = []
+    Object.entries(search).forEach(([key, val])=>{
+      const ival = `${key}=${val}`
+      return stringParams.push(ival)
+    })
+    console.log('search跳转111', search, '?'+stringParams.join('&'))
+    history.replace({ pathname, search:'?'+stringParams.join('&') });
   };
 
   const state = { querying, list, pagination };
@@ -148,51 +155,59 @@ export const usePagination = (namePase) => {
   }, [prevPagin.total]);
 
   const onChange = (type, value, filters = []) => {
+    let search = {}
     if (value) {
-      console.log('PaginationRoute', type)
+      console.log('small', type)
       switch (type) {
         case 'pagination':
           Object.keys(filters).forEach(item => {
             if (filters[item]?.toString()) {
-              query[item] = filters[item].toString();
+              search[item] = filters[item].toString();
             } else {
-              delete query[item];
+              delete search[item];
             }
           });
 
-          query.pageNo = value.current;
-          query.pageSize = value.pageSize;
+          search.pageNo = value.current;
+          search.pageSize = value.pageSize;
           break;
         case 'range':
           if (filters.length !== 0) {
-            query[filters[0]] = stringTimeFormatStamp(value[0], 'start');
-            query[filters[1]] = stringTimeFormatStamp(value[1], 'end');
+            search[filters[0]] = stringTimeFormatStamp(value[0], 'start');
+            search[filters[1]] = stringTimeFormatStamp(value[1], 'end');
             if (!value[0]) {
-              delete query[filters[0]];
-              delete query[filters[1]];
+              delete search[filters[0]];
+              delete search[filters[1]];
             }
           } else {
             Object.keys(value).forEach(item => {
-              if (value[item]) query[item] = stringTimeFormatStamp(value[item], item.includes('start') ? 'start' : 'end');
-              else delete query[item];
+              if (value[item]) search[item] = stringTimeFormatStamp(value[item], item.includes('start') ? 'start' : 'end');
+              else delete search[item];
             });
           }
 
-          delete query.pageNo;
-          delete query.pageSize;
+          delete search.pageNo;
+          delete search.pageSize;
           break;
         default:
-          query[type] = value;
-          delete query.pageNo;
-          delete query.pageSize;
+          search[type] = value;
+          delete search.pageNo;
+          delete search.pageSize;
           break;
       }
     } else {
-      delete query[type];
+      delete search[type];
     }
-    const newPagin = { ...pagination, current: +query?.pageNo || 1, total: +prevPagin?.total || 0, pageSize: +query?.pageSize || 20 };
+    const newPagin = { ...pagination, current: +search?.pageNo || 1, total: +prevPagin?.total || 0, pageSize: +search?.pageSize || 20 };
     setPagination(newPagin);
-    history.replace({ pathname, query });
+    // history.replace({ pathname, query });
+    const stringParams  = []
+    Object.entries(search).forEach(([key, val])=>{
+      const ival = `${key}=${val}`
+      return stringParams.push(ival)
+    })
+    console.log('search跳转22', search, '?'+stringParams.join('&'))
+    history.replace({ pathname, search:'?'+stringParams.join('&') });
   };
 
   return <Com {...props} pagination={pagination} onChange={onChange} querying={querying} list={list} />;
