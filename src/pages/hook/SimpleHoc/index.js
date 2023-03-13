@@ -55,7 +55,6 @@ export const usePagination = (namePase) => {
 
   const onChange = (type, value, filters, sorter = {}) => {
     let search ={}
-    console.log(value, type)
     if (value) {
       switch (type) {
         case 'pagination':
@@ -109,7 +108,6 @@ export const usePagination = (namePase) => {
       const ival = `${key}=${val}`
       return stringParams.push(ival)
     })
-    console.log('search跳转111', search, '?'+stringParams.join('&'))
     history.replace({ pathname, search:'?'+stringParams.join('&') });
   };
 
@@ -157,7 +155,6 @@ export const usePagination = (namePase) => {
   const onChange = (type, value, filters = []) => {
     let search = {}
     if (value) {
-      console.log('small', type)
       switch (type) {
         case 'pagination':
           Object.keys(filters).forEach(item => {
@@ -206,7 +203,6 @@ export const usePagination = (namePase) => {
       const ival = `${key}=${val}`
       return stringParams.push(ival)
     })
-    console.log('search跳转22', search, '?'+stringParams.join('&'))
     history.replace({ pathname, search:'?'+stringParams.join('&') });
   };
 
