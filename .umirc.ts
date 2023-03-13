@@ -11,6 +11,7 @@ export default defineConfig({
     { path: "/", component: "index" },
     {path: '/details', component: 'detail'},
     {path: '/hooks', component: 'hook'},
+    {path: '/context', component: 'context'}
   ],
   npmClient: 'npm',
 });

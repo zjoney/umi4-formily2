@@ -59,6 +59,7 @@ const getSchemaDefaultValue = (schema) => {
 }
 
 const getDefaultValue = (defaultValue, schema) => {
+  console.log('getDefaultValue=', defaultValue, schema)
   if (isValid(defaultValue)) return clone(defaultValue)
   if (Array.isArray(schema?.items))
     return getSchemaDefaultValue(schema?.items[0])
@@ -134,6 +135,8 @@ ArrayBase.Addition = (props) => {
     array.field?.pattern !== 'disabled'
   )
     return null
+    console.log('self=', self, array, )
+    console.log('props=', props)
   return (
     <Button
       type="dashed"

@@ -359,6 +359,7 @@ const Addition = (props) => {
       onClick={(e) => {
         // 如果添加数据后将超过当前页，则自动切换到下一页
         const total = array?.field?.value.length || 0
+        console.log('totalPage * pageSize + 1=', total, totalPage * pageSize + 1, isFn(changePage))
         if (total === totalPage * pageSize + 1 && isFn(changePage)) {
           changePage(totalPage + 1)
         }
