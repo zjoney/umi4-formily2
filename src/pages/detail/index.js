@@ -208,19 +208,22 @@ const Detail = () => {
         result[item] = `${+(basicCheckGroup.includes(item))}`
       }));
       // 请求
-      const promise = ['', fluidUpdate, fluidUpdate, fluidAdd][+type];
+      // const promise = ['', fluidUpdate, fluidUpdate, fluidAdd][+type];
       // 提交
-      promise({ ...result }).then((res) => {
-        const { object } = res;
-        if (object === 1) message.success('Save Success');
-      }).catch(() => {
-        message.error('Save Failed');
-      }).finally(() => {
-        // 修改路由
-        history.replace({
-          pathname: '/drugKnowledge.ivFluid',
+      // promise({ ...result }).then((res) => {
+      //   const { object } = res;
+      //   if (object === 1) message.success('Save Success');
+      // }).catch(() => {
+      //   message.error('Save Failed');
+      // }).finally(() => {
+      //   // 修改路由
+      //   history.replace({
+      //     pathname: '/drugKnowledge.ivFluid',
+      //   });
+      // })
+         history.replace({
+          pathname: '/',
         });
-      })
     });
   }
   /**
